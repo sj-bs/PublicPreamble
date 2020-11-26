@@ -1,0 +1,183 @@
+\ProvidesPackage{SSlayout}
+
+\ifSSfont
+	
+    \renewcommand{\familydefault}{\sfdefault}
+
+\else 
+
+\fi
+
+\author{\SSauthor}
+\title{\SStitle}
+\subtitle{\SSsubtitle}
+\publishers{\SSpublishers}
+
+\setlength{\voffset}{-0.25in}
+\setlength{\footskip}{0.5in}
+\addtolength{\textheight}{2in}
+\setlength{\headsep}{10pt}
+\renewcommand{\headfont}{}
+\ihead{\footnotesize{\bfseries\sffamily{\SSauthor} \sffamily\mdseries{(\today)}}}
+\automark{section}
+\chead{}
+\ohead{\footnotesize\bfseries\sffamily{\SStitle}}
+\cfoot{\pagemark}
+\KOMAoptions{numbers = noenddot}
+\usetocstyle{KOMAlike}
+\addtokomafont{subtitle}{\Large}
+\setkomafont{author}{\Large}
+\setkomafont{date}{\Large\normalsize}
+\setkomafont{publishers}{\small}
+
+\setcounter{section}{-1}
+\setcounter{tocdepth}{1}
+
+\ifSSnormal
+
+	\addtolength{\textwidth}{1.25in}
+	\setlength{\hoffset}{-0.625in}
+	
+\else
+
+	\addtolength{\textwidth}{2in}
+	\setlength{\hoffset}{-1in}
+
+\fi
+
+
+\ifSStocapp
+
+  \let\appendixpagenameorig\appendixpagename
+\renewcommand{\appendixpagename}{\sffamily\appendixpagenameorig}
+
+\makeatletter
+\newcommand*{\maintoc}{%
+  \begingroup
+    \@fileswfalse
+    \renewcommand*{\appendixattoc}{%
+      \value{tocdepth}=-10000%
+    }%
+    \tableofcontents%
+  \endgroup
+}
+\newcommand*{\appendixtoc}{
+  \begingroup
+    \edef\@alltocdepth{\the\value{tocdepth}}%
+    \setcounter{tocdepth}{-10000}%
+    \renewcommand*{\contentsname}{%
+      List of Appendices}%
+    \renewcommand*{\appendixattoc}{%
+      \setcounter{tocdepth}{\@alltocdepth}%
+    }%
+    \tableofcontents%
+    \setcounter{tocdepth}{\@alltocdepth}%
+  \endgroup
+}
+\newcommand*{\appendixattoc}{}%
+\g@addto@macro\appendix{%
+  \clearpage%
+  \phantomsection%
+  \addcontentsline{toc}{section}{\appendixname}%
+  \addtocontents{toc}{\protect\appendixattoc}%
+  \renewcommand*{\thesection}{\Alph{section}}%
+  \def\toclevel@section{1}
+  \def\toclevel@subsection{2}
+  \def\toclevel@subsubsection{3}
+  \def\toclevel@paragraph{4}
+  \def\toclevel@subparagraph{5}
+  \def\toclevel@figure{6}
+  \def\toclevel@table{7}
+}
+\makeatother
+
+\newcommand{\SSappendix}{\newpage\appendix\appendixtoc\newpage}
+
+\newcommand{\SSbegintoc}{\maintoc}
+
+\else 
+
+  \newcommand{\SSbegintoc}{\tableofcontents}
+
+\fi 
+
+\ifSSdoctype 
+
+ \def\SSfp
+    {
+      \begin{titlepage}
+        \thispagestyle{empty}
+        
+        \begin{center}
+        
+          {\Huge\bfseries\sffamily\SStitle\par}
+
+        \end{center}
+
+        \vspace{2cm}
+
+        \microtypesetup{protrusion = false} 
+          \SSbegintoc
+        \microtypesetup{protrusion = true} 
+
+        \vspace*{\fill} 
+
+          \begin{minipage}{0.55\textwidth}
+            \small{\textit{\SSauthor}}\hfil
+          \end{minipage}
+          \hfil
+          \begin{minipage}[t]{0.45\textwidth}
+            \begin{flushleft}
+              \textit{Last updated: \today}\\
+              \href{https://github.com/sj-bs}{Github/sj-bs}
+            \end{flushleft}
+          \end{minipage}
+      \end{titlepage}
+      \setcounter{page}{1}
+    }
+
+\else 
+
+    \def\SSfp
+    {
+      \begin{titlepage}
+        \thispagestyle{empty}
+        
+        \begin{center}
+          \HRule\\
+          {\Huge\bfseries\sffamily\SStitle\par}
+          \HRule\\
+        \end{center}
+
+        \begin{flushleft}
+          \small{\textsc{Lectured by \SSlecturer}\hfill \textsc{Written by \SSauthor}}
+        \end{flushleft}
+
+        \begin{center}
+          \textsc{\SSsubtitle}
+        \end{center}
+
+        \vspace*{\fill} 
+
+        \begin{flushright}
+          \begin{minipage}[t]{0.45\textwidth}
+            \begin{flushleft}
+              \textit{Last updated: \today}
+              \href{https://github.com/sj-bs}{Github/sj-bs}
+            \end{flushleft}
+          \end{minipage}
+          \\
+        \end{flushright}
+      \end{titlepage}
+
+      \microtypesetup{protrusion = false}
+        \SSbegintoc
+      \microtypesetup{protrusion = true} 
+      \setcounter{page}{1}
+    }
+
+\fi
+
+\makeatletter
+\newcommand\footnoteref[1]{\protected@xdef\@thefnmark{\ref{#1}}\@footnotemark}
+\makeatother 

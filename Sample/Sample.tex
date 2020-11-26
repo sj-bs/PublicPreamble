@@ -1,0 +1,33 @@
+\documentclass[titlepage=true]{scrartcl}
+
+\def\SStitle{Title}
+\def\SSauthor{Author}
+\def\SSlecturer{Lecturer}
+\def\SSsubtitle{Subtitle}
+
+
+% Colour: On / Off
+% Font: Roman / Sans
+% Style: Handout / Notes
+% Margin: Normal / Thin
+% Appendix: On / Off (If Off, make sure \SSappendix is removed)
+\usepackage[Colour=On, Font=Sans, Style=Handout, Margin=Normal, Appendix=On]{Preamble}
+
+\usepackage{blindtext}
+
+\begin{document}
+
+\SSfp
+
+\include{Sections/Introduction} 
+
+\include{Sections/anal}
+
+\SSappendix
+
+\blinddocument
+
+\include{Sections/Environments} 
+
+\end{document} 
+ 

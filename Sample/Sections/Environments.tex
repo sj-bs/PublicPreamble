@@ -1,0 +1,92 @@
+\section{Sample Environments}
+
+Here is an example of the types of environments that can be used, as well as a showcase of some of the macros to aid in typesetting mathematics. 
+
+\subsection{Macros}
+
+\begin{notation}[Limits] \label{LimitsNotation}
+	Let \(f\) be a real-valued function. We say that the \emph{limit} of \(f(x)\) as \(x\) approaches \(a\) is \(L\):
+
+	\[\Lim{x\to a}f(x)=L\]
+\end{notation}
+
+In \cref{LimitsNotation} we use the macro \verb!\Lim{x\to a}f(x)=L! as a short cut for \verb!\displaystyle\lim_{x\to a}f(x)=L!. 
+
+\begin{remark} 
+	In this example, as the limit is in display mode (due being wrapped in \verb! \[ ...\]!), the \verb!\displaystyle! aspect of the macro is not used. However, if we were in inline mode, such as now, the command forces \verb!\lim! to show as if it were in display mode. For instance, this is \verb!\lim! as an inline function: \(\lim_{x\to\infty}\) and here it is again using the macro which forces the display mode: \(\Lim{x\to\infty}\). The product is that the limit notation is now under the actual notation, leading to neater and better looking mathematics.
+\end{remark}
+
+Similar to the limit macro, there is also the absolute value macro i.e \verb!\abs{x}! which shows \(\abs{x}\). There are others but for now, these two seem the most helpful for introductory mathematics. I will update and add more examples as I see fit. To see all the macros, I highly suggest you take a look at the well documented\footnote{If I do say so myself} preamble.
+
+\subsection{Theorem Styles}
+
+The theorem style for Theorems, Lemmas and propositions are all the same:
+
+\begin{theorem}[Intermediate Value Theorem]\label{IVT}
+	If \(f\) is a continuous, real-valued function defined on the interval \([a,b]\), with \(f(a)\ne f(b)\), and \(y\) is a real number between \(f(a)\) and \(f(b)\), then there exists some \(c\in(a,b)\) such that \(f(c)=y\)
+\end{theorem}
+
+Similarly for Corollary, the environment is the same for the claim environment.
+
+\begin{corollary}[The Boundedness Theorem]\label{Boundedness Theorem}
+	Suppose \(f\) is continuous on a closed interval \([a,b]\). Then there exists some value \(M\in\R\) such that \(f(c)\leq M\) for all \(c\in[a,b]\). (That is, \(M\) is an upper bound for \(f\) on the interval \([a,b]\).)
+\end{corollary}
+
+\begin{example}[extreme Value Theorem]\label{extreme Value Theorem}
+	
+	Suppose that \(f\) is continuous on a closed interval \([a,b]\). Show that \(f\) attains a maximum on \([a,b]\); that is, there exists a real number \(c\in[a,b]\) such that \(f(c)\geq f(x)\) for any \(x\in[a,b]\)
+\end{example}
+
+\begin{proof}
+	By \cref{Boundedness Theorem}, we know that \(f([a,b])\) has an upper bound, and thus, by the completeness property of \(\R\), it has a least upper bound. Call this least upper bound \(M\). We need to show that \(M\) is the image of some point \(c\in[a,b]\). We will prove this by contradiction, so assume that \(M\) is not in the image of \(f([a,b])\). Then the function \(g(x)=M-f(x)\) is continuous and strictly positive on all of \([a,b]\). But more than that: because \(M\)) is the least upper bound, we know that \(g^{-1}((0,\epsilon))\ne 0\) for all \(\epsilon>0\), because otherwise \(M-\epsilon\) would be an upper bound for \(f[a,b]\).\\
+
+	Since \(g(x)\ne 0\) on \([a,b]\), the function \(h(x)-\frac{1}{g(x)}\) is a continuous function on \([a,b]\). However, \(h(x)\) is unbounded, since for all \(\epsilon>0\), there is some \(x\) such that \(g(x)<\epsilon\), and hence \(\frac{1}{\epsilon}\) is not an upper bound for \(h\). But the unboundedness of \(h\) contradicts the Boundedness Theorem of \cref{Boundedness Theorem}.\\
+
+	Therefore, \(M\) must be in \(f[a,b]\), as desired.
+\end{proof}
+
+\begin{remark}
+	Naturally, the Boundedness Theorem and the Extreme Value Theorem work just as well for lower bounds and minimums - we can simply replace \(f\) with \(-f\), since a lower bound for \(f\) is \(-1\) times an upper bound of \(-f\), and vice versa. 
+\end{remark}
+
+\subsubsection{Exercise environment}
+
+Here is an example of the exercise environment making use of the solution, claim and subproof environments, as well as other environments for questions and problems.  
+
+\begin{exercise}[Weighted AM-GM]\label{AM-GM}
+	
+\end{exercise}
+Show that for all nonnegative reals \(a_1,\ldots,a_n\) and nonnegative reals \(\lambda_1,\ldots,\lambda_n\) such that \(\displaystyle\sum_{i=1}^{n}\lambda_i=1\), then
+
+\[\sum_{i=1}^n\lambda_ia_i\geq\prod_{i=1}^na_i^{\lambda_i}\]
+
+With equality if and only if \(a_i=a_j\) for all \(i,j\) such that \(\lambda_i,\lambda_j\ne 0\).\\
+
+\noindent\small{Source: \href{https://artofproblemsolving.com/wiki/index.php/Proofs_of_AM-GM#Proofs_of_Unweighted_AM-GM}{Proofs of AM-GM, AoPS}}
+
+\begin{solution}
+	
+	We first note that we may disregard any \(a_i\) for which \(\lambda_i=0\), as they contribute to neither side of the desired inequality. We also note that if \(a_i=0\) and \(\lambda_i\ne 0\), for some \(i\), then the right-hand side of the inequality is 0 and the left hand of the inequality is greater or equal to zero, with equality if and only if \(a_j=0=a_i\) whenever \(\lambda_j\ne 0\). Thus we may henceforth assume that all \(a_i\) and \(\lambda_i\) are \emph{strictly positive}.\\
+
+	\begin{claim}[Jensen's Inequality]\label{Jensens}
+		Let F be a concave function\footnote{Should \(F\) be a convex function we have \(F(a_1x_1+\cdots+a_nx_n)\leq a_1F(x_1)+\cdots+a_nF(x_n)\)} of one real variable. Let \(x_1,\ldots,x_n\in\R_n\) and let \(a_i,\ldots,a_n\geq0\) satisfy \(a_1+\cdots+a_n=1\). Then:
+		
+		\[F(a_1x_1+\cdots+a_nx_n)\geq a_1F(x_1)+\cdots+a_nF(x_n)\]
+	\end{claim}
+
+	\begin{subproof}
+		There are many ways to prove the inequality, however, it simply follows from doing induction on \(n\). This is only here to show the subproof Marco, not to teach induction.
+	\end{subproof}
+
+	We note that the function \(x\mapsto \ln x\) is strictly concave. Then by Jensens Inequality (\cref{Jensens}), 
+
+	\[\ln\sum_{i=1}^n\lambda_ia_i\geq\sum_{i=1}^n\lambda_i\ln a_i=\ln\prod_{i=1}^na_i^{\lambda_i}\]
+
+	with equality of and only if all the \(a_i\) are equal. Since \(x\mapsto \ln x\) is a strictly increasing function, it then follows that 
+
+	\[\sum_{i=1}^n\lambda_ia_i\geq\prod_{i=1}^na_i^{\lambda_i}\]
+
+	with equality if and only if all the \(a_i\) are equal, as desired.
+	
+
+\end{solution}

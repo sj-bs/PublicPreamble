@@ -1,0 +1,45 @@
+\ProvidesPackage{SSmacros}
+
+
+\newcommand{\hrulebar}{
+	\par\hspace{\fill}\rule{0.95\linewidth}{.7pt}\hspace{\fill}
+	\par\nointerlineskip \vspace{\baselineskip}
+	}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\newcommand{\SSbreak}{\noindent\rule[0.5ex]{\linewidth}{1pt}}
+
+\newenvironment{subproof}[1][Proof]{
+	\begin{proof}[#1]\renewcommand{\qedsymbol}{$\blacksquare$}}%
+	{\end{proof}}
+
+\newenvironment{solution}{\begin{proof}[Solution]}{\end{proof}}	
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+
+\newcommand{\abs}[1]{\left\lvert #1\right\rvert}
+
+\newcommand{\SSmax}[1]{\text{max}\{#1\}}
+\newcommand{\SSmin}[1]{\text{min}\{#1\}}
+
+\newcommand{\Lim}[1]{\displaystyle{\lim_{#1}}}
+
+\renewcommand{\epsilon}{\ensuremath{\varepsilon}}
+\renewcommand{\emptyset}{\ensuremath{\varnothing}}
+\renewcommand{\phi}{\ensuremath{\varphi}}
+
+
+\newcommand{\SSbf}{\textbf}
+\newcommand{\SSet}[1]{\{{#1}\}}
+\newcommand{\SSeq}{\subseteq}
+\newcommand{\SSS}{\subset}
+\newcommand{\SScomp}[2]{#1\backslash #2}
+\newcommand{\SSsup}[1]{\text{sup}(#1)}
+\newcommand{\SSinf}[1]{\text{inf}(#1)}
+\newcommand{\SSseg}[1]{\overline{#1}}

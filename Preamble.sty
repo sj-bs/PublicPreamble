@@ -1,0 +1,43 @@
+\ProvidesPackage{Preamble}
+
+\usepackage{SSpackages}
+ 
+\newif\ifSSfont
+\newif\ifSScolour
+\newif\ifSSnormal
+\newif\ifSSdoctype
+\newif\ifSStocapp
+\DeclareOption{Font=Sans}{\SSfonttrue}
+\DeclareOption{Font=Roman}{\SSfontfalse}
+\DeclareOption{Colour=On}{\SScolourtrue}
+\DeclareOption{Colour=Off}{\SScolourfalse}
+\DeclareOption{Margin=Normal}{\SSnormaltrue}
+\DeclareOption{Margin=Thin}{\SSnormalfalse}
+\DeclareOption{Style=Handout}{\SSdoctypetrue}
+\DeclareOption{Style=Notes}{\SSdoctypefalse}
+\DeclareOption{Appendix=On}{\SStocapptrue}
+\DeclareOption{Appendix=Off}{\SStocappfalse}
+\ProcessOptions\relax
+ %
+\ifSScolour
+	
+	\usepackage{SScolour}
+
+\else 
+
+	\usepackage{SSblack}
+
+\fi
+
+\usepackage{SSmacros}
+
+\usepackage{SSlayout}
+ 
+\pgfplotsset{compat=1.16}
+\usetikzlibrary{arrows}
+
+%I forgot why I added this. I think it was because my compiles kept spitting out 3gb pdf's
+\pdfcompresslevel=0
+\pdfobjcompresslevel=0
+
+\endinput
